@@ -1,7 +1,6 @@
 package com.example.batchdemo.job;
 
 import java.util.Map;
-import javax.persistence.GeneratedValue;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;

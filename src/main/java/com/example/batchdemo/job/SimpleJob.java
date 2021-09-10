@@ -2,11 +2,8 @@ package com.example.batchdemo.job;
 
 import static org.springframework.data.domain.Sort.Direction.ASC;
 
-import antlr.collections.impl.IntRange;
 import com.example.batchdemo.job.persisted.User;
 import com.example.batchdemo.job.persisted.UserRepository;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -22,17 +19,9 @@ import org.springframework.batch.item.data.RepositoryItemWriter;
 import org.springframework.batch.item.data.builder.RepositoryItemReaderBuilder;
 import org.springframework.batch.item.data.builder.RepositoryItemWriterBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.parsing.AliasDefinition;
-import org.springframework.beans.factory.parsing.ComponentDefinition;
-import org.springframework.beans.factory.parsing.DefaultsDefinition;
-import org.springframework.beans.factory.parsing.ImportDefinition;
-import org.springframework.beans.factory.parsing.ReaderEventListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.TaskExecutor;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 @Slf4j
@@ -53,11 +42,11 @@ public class SimpleJob {
     public void initData() {
         userRepository.saveAll(
             IntStream.range(1, 5000)
-            .mapToObj(i -> User.builder()
-                .name(i + "")
-                .email(i + "@email.com.tw")
-                .build())
-            .collect(Collectors.toList()));
+                .mapToObj(i -> User.builder()
+                    .name(i + "")
+                    .email(i + "@email.com.tw")
+                    .build())
+                .collect(Collectors.toList()));
     }
 
     @Bean
@@ -105,7 +94,7 @@ public class SimpleJob {
             .processor(itemProcessor())
             .writer(itemWriter())
             .taskExecutor(taskExecutor())
-//            .throttleLimit(1)
+            //            .throttleLimit(1)
             .build();
     }
 
